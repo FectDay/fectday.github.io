@@ -1,7 +1,7 @@
 # FectDay Music License v1.0
 
 **Effective date:** 2026  
-**Author / Rightsholder:** Your Artist Name (FectDay)
+**Author / Rightsholder:** FectDay
 
 All music tracks, instrumentals, themes and audio works created by the Author are the intellectual property of the Author and are protected by copyright law.
 
@@ -23,11 +23,11 @@ No payment or special permission is required for this type of use.
 
 When using the track, the following credit must be included:
 
-> **Music by Your Artist Name**
+> **Music by FectDay**
 
 Preferred detailed format if a credits section exists:
 
-> Music & Production — Your Artist Name
+> Music & Production — FectDay
 
 ---
 
