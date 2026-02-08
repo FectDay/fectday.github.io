@@ -18,11 +18,11 @@
   }
 
   function initParticles() {
-    const targetCount = Math.max(28, Math.floor((w * h) / 90000)); // скалируется
+    // уменьшим на мобильных
+    const isSmall = window.innerWidth < 640;
+    const targetCount = isSmall ? Math.max(10, Math.floor((w * h) / 250000)) : Math.max(28, Math.floor((w * h) / 90000));
     particles = [];
-    for (let i = 0; i < targetCount; i++) {
-      particles.push(createParticle());
-    }
+    for (let i = 0; i < targetCount; i++) particles.push(createParticle());
   }
 
   function createParticle() {
@@ -44,7 +44,6 @@
     tLast = now;
     ctx.clearRect(0, 0, w, h);
 
-    // мягкий градиент сверху
     const g = ctx.createLinearGradient(0,0,0,h);
     g.addColorStop(0, 'rgba(20,24,24,0.08)');
     g.addColorStop(1, 'rgba(4,6,8,0.18)');
@@ -60,7 +59,6 @@
       if (p.y < -50) p.y = h + 50;
       if (p.y > h + 50) p.y = -50;
 
-      // glow
       const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 10);
       grad.addColorStop(0, `hsla(${p.hue}, 60%, 60%, ${p.alpha})`);
       grad.addColorStop(0.15, `hsla(${p.hue}, 60%, 50%, ${p.alpha * 0.55})`);
@@ -75,7 +73,6 @@
   }
 
   window.addEventListener('resize', () => {
-    // debounce
     clearTimeout(window._resizeTimer);
     window._resizeTimer = setTimeout(resize, 120);
   });
@@ -86,7 +83,6 @@
 
 /* ==== карточки: открытие по клику + появление при скролле ==== */
 (() => {
-  // кликабельные карточки
   document.querySelectorAll('.card[data-link]').forEach(card => {
     card.addEventListener('click', () => {
       const url = card.dataset.link;
@@ -95,19 +91,14 @@
     });
   });
 
-  // IntersectionObserver для анимации появления
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add('is-visible');
-        // если один раз показать — отписываемся
         observer.unobserve(entry.target);
       }
     });
-  }, {
-    root: null,
-    threshold: 0.12,
-  });
+  }, { root: null, threshold: 0.12 });
 
   document.querySelectorAll('.card').forEach((el, i) => {
     el.style.transitionDelay = (i * 40) + 'ms';
@@ -115,11 +106,56 @@
   });
 })();
 
-/* ==== мелкие улучшения: плавный скролл для якорей (в старых браузерах) ==== */
+/* ==== гамбургер/мобильное меню ==== */
+(() => {
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navLinks = document.querySelectorAll('.mobile-link, .nav-link, .btn');
+
+  function openMenu() {
+    burger.classList.add('open');
+    burger.setAttribute('aria-expanded','true');
+    mobileMenu.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden','false');
+    document.body.style.overflow = 'hidden'; // блокируем скролл фона
+  }
+  function closeMenu() {
+    burger.classList.remove('open');
+    burger.setAttribute('aria-expanded','false');
+    mobileMenu.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden','true');
+    document.body.style.overflow = ''; // возвращаем скролл
+  }
+
+  burger.addEventListener('click', (e) => {
+    if (mobileMenu.classList.contains('open')) closeMenu();
+    else openMenu();
+  });
+
+  // закрывать при клике по ссылке внутри меню
+  document.querySelectorAll('.mobile-link, .mobile-cta').forEach(a => {
+    a.addEventListener('click', () => {
+      closeMenu();
+    });
+  });
+
+  // закрывать при клике вне панели
+  mobileMenu.addEventListener('click', (e) => {
+    if (e.target === mobileMenu) closeMenu();
+  });
+
+  // ESC для закрытия
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+  });
+})();
+
+/* ==== плавный якорь (старые браузеры) ==== */
 (() => {
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', function(e){
-      const target = document.querySelector(this.getAttribute('href'));
+      const href = this.getAttribute('href');
+      const target = document.querySelector(href);
       if (target) {
         e.preventDefault();
         target.scrollIntoView({behavior: 'smooth', block: 'start'});
