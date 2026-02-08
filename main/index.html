@@ -1,86 +1,133 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>FectDay — Telegram Bot Developer</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FectDay — Telegram Bot Developer</title>
+  <meta name="description" content="Разработка Telegram-ботов на Python / Node.js — заявки, запись, оплата, CRM. Пакеты, кейсы, контакты." />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Canvas для частиц -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
 
-<header class="hero">
-    <h1>Разработка Telegram-ботов на Python / Node.js</h1>
-    <p>Автоматизация бизнеса, заявки, записи, оплаты, CRM</p>
-    <div class="buttons">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <h1>FectDay</h1>
+        <p class="tag">Telegram-боты • Автоматизация бизнеса</p>
+      </div>
+
+      <nav class="nav">
         <a href="#cases">Кейсы</a>
         <a href="#pricing">Тарифы</a>
-        <a href="https://t.me/yourusername" target="_blank">Связаться</a>
+        <a href="https://github.com/FectDay" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://freelance.ru/FectDay" target="_blank" rel="noopener">Freelance</a>
+      </nav>
+
+      <a class="cta" href="https://t.me/yourusername" target="_blank" rel="noopener">Связаться</a>
     </div>
-</header>
+  </header>
 
-<section id="cases" class="cases">
-    <h2>Проекты</h2>
-    <div class="cards">
-
-        <div class="card" onclick="openLink('https://github.com/FectDay')">
-            <h3>Бот для заявок</h3>
-            <p>Анкеты, база заявок, админка</p>
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <h2>Разработка Telegram-ботов на Python / Node.js</h2>
+        <p class="lead">Автоматизация заявок, запись клиентов, меню заказов, оплата, CRM-логика. Быстро, аккуратно, с готовой инструкцией.</p>
+        <div class="hero-cta">
+          <a href="#cases" class="btn">Кейсы</a>
+          <a href="#pricing" class="btn ghost">Тарифы</a>
         </div>
+      </div>
+    </section>
 
-        <div class="card" onclick="openLink('https://github.com/FectDay')">
-            <h3>Бот для записи</h3>
-            <p>Выбор времени, уведомления, таблица клиентов</p>
+    <section id="cases" class="section cases">
+      <div class="container">
+        <h3 class="section-title">Проекты</h3>
+        <div class="grid cards" id="cards">
+          <article class="card" data-link="https://github.com/FectDay/telegram-requests-bot">
+            <h4>Бот для заявок</h4>
+            <p>Анкеты, база заявок, уведомления админу, экспорт.</p>
+            <div class="meta">Python/aiogram · 1–2 дня</div>
+          </article>
+
+          <article class="card" data-link="https://github.com/FectDay/telegram-booking-bot">
+            <h4>Бот для записи</h4>
+            <p>Выбор даты/времени, защита от дублей, напоминания.</p>
+            <div class="meta">Node.js/telegraf · 2–3 дня</div>
+          </article>
+
+          <article class="card" data-link="https://github.com/FectDay/telegram-shop-bot">
+            <h4>Бот с оплатой</h4>
+            <p>Корзина, приём платежей, выдача доступа, учёт.</p>
+            <div class="meta">Интеграции · 3–5 дней</div>
+          </article>
+
+          <article class="card" data-link="https://github.com/FectDay/telegram-crm-bot">
+            <h4>CRM-бот</h4>
+            <p>Статусы заявок, воронка, роли, экспорт и аналитика.</p>
+            <div class="meta">Platform · 1 неделя+</div>
+          </article>
         </div>
+      </div>
+    </section>
 
-        <div class="card" onclick="openLink('https://github.com/FectDay')">
-            <h3>Бот с оплатой</h3>
-            <p>Корзина, оплата, доступы</p>
-        </div>
-
-        <div class="card" onclick="openLink('https://github.com/FectDay')">
-            <h3>CRM-бот</h3>
-            <p>Статусы заявок, роли, база клиентов</p>
-        </div>
-
-    </div>
-</section>
-
-<section id="pricing" class="pricing">
-    <h2>Тарифы</h2>
-    <div class="cards">
-
-        <div class="card">
-            <h3>Start</h3>
+    <section id="pricing" class="section pricing">
+      <div class="container">
+        <h3 class="section-title">Тарифы</h3>
+        <div class="grid cards">
+          <div class="card price">
+            <h4>Start</h4>
             <p>Заявки и анкеты</p>
-            <span>12 000 ₽</span>
-        </div>
+            <div class="price-val">12 000 ₽</div>
+          </div>
 
-        <div class="card">
-            <h3>Business</h3>
+          <div class="card price">
+            <h4>Business</h4>
             <p>Запись клиентов, учёт</p>
-            <span>25 000 ₽</span>
-        </div>
+            <div class="price-val">25 000 ₽</div>
+          </div>
 
-        <div class="card">
-            <h3>Shop</h3>
+          <div class="card price">
+            <h4>Shop</h4>
             <p>Меню, корзина, оплата</p>
-            <span>45 000 ₽</span>
-        </div>
+            <div class="price-val">45 000 ₽</div>
+          </div>
 
-        <div class="card">
-            <h3>Pro</h3>
-            <p>Интеграции, CRM, API</p>
-            <span>от 65 000 ₽</span>
+          <div class="card price">
+            <h4>Pro / Custom</h4>
+            <p>Интеграции: кассы, API, CRM</p>
+            <div class="price-val">от 65 000 ₽</div>
+          </div>
         </div>
+      </div>
+    </section>
 
+    <section class="section about">
+      <div class="container about-inner">
+        <h3 class="section-title">Как работаю</h3>
+        <ul class="list">
+          <li>Чёткие сроки и релиз: код+инструкция.</li>
+          <li>До 5 мелких правок бесплатно после сдачи.</li>
+          <li>Готовые шаблоны ускоряют запуск — вы платите за результат, а не за попытки.</li>
+        </ul>
+        <div class="contact">
+          <a class="btn" href="https://t.me/yourusername" target="_blank" rel="noopener">Написать в Telegram</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="links">
+        <a href="https://github.com/FectDay" target="_blank" rel="noopener">github.com/FectDay</a>
+        <a href="https://freelance.ru/FectDay" target="_blank" rel="noopener">freelance.ru/FectDay</a>
+      </div>
+      <div class="copy">© FectDay — Telegram bot developer</div>
     </div>
-</section>
+  </footer>
 
-<footer>
-    <a href="https://github.com/FectDay" target="_blank">GitHub</a>
-    <a href="https://freelance.ru/FectDay" target="_blank">Freelance</a>
-</footer>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
