@@ -79,6 +79,35 @@ body{
 }
 .nav a:hover{color:#fff;background:var(--glass)}
 
+/* гамбургер */
+.burger{
+  display:none;
+  width:44px;
+  height:36px;
+  border-radius:10px;
+  background:transparent;
+  border: none;
+  cursor:pointer;
+  align-items:center;
+  justify-content:center;
+  padding:6px;
+  position:relative;
+  z-index:40;
+}
+.burger span{
+  display:block;
+  height:3px;
+  background: #e6e6e6;
+  border-radius:3px;
+  transition: transform 220ms ease, opacity 180ms ease;
+}
+.burger span:nth-child(1){ width:22px; margin-bottom:6px; transform-origin:left center;}
+.burger span:nth-child(2){ width:16px; margin-bottom:6px; transform-origin:left center;}
+.burger span:nth-child(3){ width:12px; transform-origin:left center;}
+.burger.open span:nth-child(1){ transform: translateY(9px) rotate(45deg); width:22px;}
+.burger.open span:nth-child(2){ opacity:0; transform: scaleX(0.2);}
+.burger.open span:nth-child(3){ transform: translateY(-9px) rotate(-45deg); width:22px;}
+
 /* cta */
 .cta{
   background: linear-gradient(90deg, rgba(74,201,122,0.18), rgba(100,200,170,0.12));
@@ -178,17 +207,67 @@ body{
   transition-delay: 0ms;
 }
 
+/* мобильное меню overlay */
+.mobile-menu{
+  position:fixed;
+  inset:0;
+  z-index:38;
+  display:flex;
+  justify-content:flex-end;
+  pointer-events:none;
+  transition:opacity 220ms ease;
+  opacity:0;
+}
+.mobile-menu .mobile-menu-inner{
+  width:300px;
+  max-width:84%;
+  height:100%;
+  background: linear-gradient(180deg, rgba(12,12,14,0.98), rgba(20,20,22,0.98));
+  border-left:1px solid rgba(255,255,255,0.03);
+  padding:40px 22px;
+  box-shadow: -20px 40px 80px rgba(0,0,0,0.6);
+  transform:translateX(18px);
+  transition:transform 260ms cubic-bezier(.2,.9,.25,1);
+  pointer-events:auto;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+.mobile-menu.open{ opacity:1; pointer-events:auto; }
+.mobile-menu.open .mobile-menu-inner{ transform:translateX(0); }
+
+/* mobile links */
+.mobile-link{
+  color:#eaeaea;
+  text-decoration:none;
+  font-size:16px;
+  padding:12px 10px;
+  border-radius:8px;
+}
+.mobile-link:hover{ background:rgba(255,255,255,0.02) }
+.mobile-cta{
+  margin-top:8px;
+  padding:10px 12px;
+  background:var(--accent);
+  color:#0b0b0b;
+  border-radius:8px;
+  text-decoration:none;
+  font-weight:700;
+  display:inline-block;
+}
+
 /* адаптация */
 @media (max-width:900px){
   .header-inner{ gap:10px; padding:12px 0 }
-  .nav{ display:none } /* чтобы не мудрить с мобильным меню — можно добавить далее */
-  .cta{ padding:8px 10px }
+  .nav{ display:none } /* скрываем десктопное меню */
+  .burger{ display:flex; }
+  .cta{ display:none }
   .hero{ padding:40px 0 20px }
   .hero h2{ font-size:22px }
   .about-inner{ flex-direction:column; align-items:flex-start }
 }
 
-/* учитываем user's prefers-reduced-motion */
+/* prefers reduced */
 @media (prefers-reduced-motion: reduce){
   *{ transition:none !important; animation:none !important; scroll-behavior:auto !important; }
 }
