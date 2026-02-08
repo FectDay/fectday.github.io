@@ -18,16 +18,32 @@
         <p class="tag">Telegram-боты • Автоматизация бизнеса</p>
       </div>
 
-      <nav class="nav">
-        <a href="#cases">Кейсы</a>
-        <a href="#pricing">Тарифы</a>
-        <a href="https://github.com/FectDay" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://freelance.ru/FectDay" target="_blank" rel="noopener">Freelance</a>
+      <!-- гамбургер -->
+      <button id="burger" class="burger" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav" id="main-nav" aria-hidden="false">
+        <a href="#cases" class="nav-link">Кейсы</a>
+        <a href="#pricing" class="nav-link">Тарифы</a>
+        <a href="https://github.com/FectDay" target="_blank" rel="noopener" class="nav-link">GitHub</a>
+        <a href="https://freelance.ru/FectDay" target="_blank" rel="noopener" class="nav-link">Freelance</a>
       </nav>
 
       <a class="cta" href="https://t.me/yourusername" target="_blank" rel="noopener">Связаться</a>
     </div>
   </header>
+
+  <!-- боковое мобильное меню (overlay) -->
+  <aside id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <a href="#cases" class="mobile-link">Кейсы</a>
+      <a href="#pricing" class="mobile-link">Тарифы</a>
+      <a href="https://github.com/FectDay" target="_blank" rel="noopener" class="mobile-link">GitHub</a>
+      <a href="https://freelance.ru/FectDay" target="_blank" rel="noopener" class="mobile-link">Freelance</a>
+      <a href="https://t.me/yourusername" target="_blank" rel="noopener" class="mobile-cta">Написать</a>
+    </div>
+  </aside>
 
   <main>
     <section class="hero">
